@@ -1,0 +1,20 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  font-family: sans-serif;
+}
+.main-title {
+  margin-bottom: 2rem;
+}
+.container {
+  max-width: 900px;
+  margin: 20px auto;
+}
+.posts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}

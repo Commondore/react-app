@@ -1,0 +1,10 @@
+.post-item {
+  padding: 20px;
+  border-radius: 10px;
+  background: #f2f2f2;
+  display: grid;
+  gap: 10px;
+}
+.post-title {
+  font-size: 1.4rem;
+}
