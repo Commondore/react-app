@@ -1,0 +1,13 @@
+.btn {
+  display: inline-flex;
+  padding: 20px 30px;
+  border: none;
+  background: #000;
+  color: #fff;
+  border-radius: 10px;
+  font-size: 1.2em;
+}
+
+.active {
+  background: tomato;
+}

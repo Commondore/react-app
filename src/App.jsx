@@ -1,10 +1,9 @@
-import { Footer } from "./components/footer";
 import { Header } from "./components/header";
-import { Person } from "./components/users/person";
 import { Title } from "./components/title";
-import { Counter } from "./components/counter";
 import { useState } from "react";
 import { Users } from "./components/users";
+import { Toggler } from "./components/toggler";
+import { CounterTitle } from "./components/counter-title";
 
 const App = () => {
   const [users, setUsers] = useState([
@@ -13,11 +12,14 @@ const App = () => {
     { id: 3, name: "Sam", age: 10, avatar: "/images/profile.png", hobby: "Футбол" },
   ]);
 
-  const changeName = () => {
+  const [show, setShow] = useState(true);
+
+  const changeName = (value, id) => {
     const copy = [...users];
-    const person = { ...users[0] };
-    person.name = "Peter Parker";
-    copy[0] = person;
+    const index = copy.findIndex((person) => person.id === id);
+    const person = { ...users[index] };
+    person.name = value;
+    copy[index] = person;
     setUsers(copy);
   };
 
@@ -32,19 +34,40 @@ const App = () => {
     });
   };
 
+  const removePerson = (id) => {
+    setUsers((users) => {
+      return users.filter((person) => person.id !== id);
+    });
+  };
+
+  const togglePeople = () => {
+    setShow((show) => {
+      return !show;
+    });
+  };
+
   return (
     <>
       <Header />
       <div className="container">
         <div className="text-center">
           <Title text="Приложение на React" />
-          <Counter />
-          <button onClick={changeName}>Изменить имя 1го пользователя</button>
-        </div>
 
-        <Users users={users} increaseAge={increaseAge} />
+          <Toggler show={show} toggle={togglePeople}>
+            Переключатель людей
+          </Toggler>
+
+          <CounterTitle units={users}>Кол-во людей</CounterTitle>
+        </div>
+        {show && (
+          <Users
+            users={users}
+            increaseAge={increaseAge}
+            changeName={changeName}
+            removePerson={removePerson}
+          />
+        )}
       </div>
-      <Footer />
     </>
   );
 };
